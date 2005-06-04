@@ -1,9 +1,15 @@
 Changes
+lib/Video/Xine.pm
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
+MANIFEST.SKIP
+META.yml
 ppport.h
 README
-Xine.xs
+t/Event.t
+t/test_config
+t/time_015.avi
 t/Video-Xine.t
-lib/Video/Xine.pm
-META.yml                                 Module meta-data (added by MakeMaker)
+t/X11.t
+typemap
+Xine.xs
