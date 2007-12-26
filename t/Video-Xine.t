@@ -5,13 +5,14 @@
 
 use strict;
 use FindBin '$Bin';
-use Test::More tests => 10;
+use Test::More tests => 11;
 BEGIN { use_ok('Video::Xine') };
 
 #########################
 
 
 my $xine = Video::Xine->new(config_file => "$Bin/test_config");
+$xine->set_param(1,1);
 ok(1);
 
 TEST1: {
@@ -31,16 +32,22 @@ TEST1: {
   is($stream->get_status(), XINE_STATUS_IDLE);
 }
 
-SKIP: {
-  skip "I need to find a short, open-source test file", 1;
+TEST2: {
   my $stream = $xine->stream_new();
-  $stream->open("/dev/null")
-    or die "Couldn't open '/dev/null'";
+  $stream->open("$Bin/drunk_as_an_owl.ogg")
+    or die "Couldn't open '$Bin/drunk_as_an_owl.ogg'";
   $stream->play()
-	or die "Couldn't play '/dev/null'";
+	or die "Couldn't play '$Bin/drunk_as_an_owl.ogg'";
   while ($stream->get_status() == XINE_STATUS_PLAY) {
     sleep 1;
   }
   $stream->close();
   ok(1);
+}
+
+TODO: {
+  local $TODO = 1;
+  my $stream = $xine->stream_new();
+  $stream->open("/dev/null");
+  is($stream->get_error(), XINE_ERROR_NO_INPUT_PLUGIN);
 }

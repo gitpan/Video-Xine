@@ -1,10 +1,8 @@
-Video-Xine version 0.02
+Video-Xine version 0.04
 =======================
 
-This is an interface to the Xine library. It was developed as part of
-the Video::PlaybackMachine project, and is known to work on i386
-machines running Linux kernels 2.6 and above.
-
+This is an interface to the xine-lib library. It can be used to create
+a Perl-controlled instance of Xine.
 
 INSTALLATION
 
@@ -27,20 +25,11 @@ In addition, if you wish to actually display video, you probably want:
 
 which provides a workable, if extremely simple, user interface.
 
-Both of these modules were developed as part of:
-
-  Video::PlaybackMachine
-
-which is an automatic scheduled media display system. OK, a TV station
-without the equipment.
-
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2005 by Stephen Nelson
+Copyright (C) 2005-2007 by Stephen Nelson
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.5 or,
 at your option, any later version of Perl 5 you may have available.
 
-This library is not worth too much without Xine, which is available
-under the GNU public license.
