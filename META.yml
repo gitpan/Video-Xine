@@ -1,10 +1,31 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Video-Xine
-version:      0.06
-version_from: lib/Video/Xine.pm
-installdirs:  site
+---
+name: Video-Xine
+version: 0.07
+author:
+  - 'Stephen Nelson, E<lt>stephen@cpan.orgE<gt>'
+abstract: Perl interface to libxine
+license: perl
 requires:
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.30
+  ExtUtils::CBuilder: 0.21
+  Module::Build: 0.28
+  Test::More: 0.01
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
+provides:
+  Video::Xine:
+    file: lib/Video/Xine.pm
+    version: 0.07
+  Video::Xine::Driver::Audio:
+    file: lib/Video/Xine.pm
+  Video::Xine::Driver::Video:
+    file: lib/Video/Xine.pm
+  Video::Xine::Event:
+    file: lib/Video/Xine.pm
+  Video::Xine::Event::Queue:
+    file: lib/Video/Xine.pm
+  Video::Xine::Stream:
+    file: lib/Video/Xine.pm
+resources:
+  license: http://dev.perl.org/licenses/
