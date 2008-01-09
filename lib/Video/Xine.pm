@@ -7,12 +7,13 @@ use warnings;
 use Exporter;
 use Carp;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
   XINE_STATUS_IDLE
   XINE_STATUS_STOP
   XINE_STATUS_PLAY
+  XINE_STATUS_QUIT
 
   XINE_PARAM_SPEED                
   XINE_PARAM_AV_OFFSET            
@@ -105,6 +106,7 @@ use constant {
   XINE_STATUS_IDLE                  =>  0,
   XINE_STATUS_STOP                  =>  1,
   XINE_STATUS_PLAY                  =>  2,
+  XINE_STATUS_QUIT                  =>  3,
 
   XINE_PARAM_SPEED                  =>  1,
   XINE_PARAM_AV_OFFSET              =>  2,
@@ -188,6 +190,14 @@ use constant {
   XINE_VISUAL_TYPE_MACOSX           => 9,
   XINE_VISUAL_TYPE_XCB              => 11
 };
+
+sub get_version {
+    my $type = shift;
+
+    my ($major, $minor, $sub);
+    xine_get_version($major, $minor, $sub);
+    return "$major.$minor.$sub";
+}
 
 sub new {
   my $type = shift;
@@ -472,7 +482,7 @@ Video::Xine - Perl interface to libxine
   my $video_driver = Video::Xine::Driver::Video->new($xine,"auto",1,$x11_visual);
 
   # Create a new stream (put your video driver under $DRIVER)
-  my $stream = $xine->stream_new(undef,$DRIVER);
+  my $stream = $xine->stream_new($AUDIO_DRIVER,$VIDEO_DRIVER);
 
   # Open a file on the stream
   $stream->open('file://my/movie/file.avi')
@@ -498,9 +508,11 @@ A perl interface to Xine, the Linux movie player. More properly, an
 interface to libxine, the development library. Requires installation of
 libxine.
 
-Xine by itself does not provide a user interface, and neither does
-this interface. Instead, you must set up the window using your own
-windowing code, and pass the window information to Xine.
+Xine by itself does not provide a user interface or windowing system,
+and neither does this interface. Instead, you must set up the window
+using your own windowing code, and pass the window information to
+Xine. The "X11::FullScreen" module provides a simple interface for
+doing this with X.
 
 
 =head2 METHODS
@@ -509,12 +521,37 @@ windowing code, and pass the window information to Xine.
 
 Constructor. Takes named argument 'config_file'.
 
+Example:
+
+  my $xine = Video::Xine->new( config_file => "$ENV{'HOME'}/xine/config" )
+
+=head3 get_version()
+
+Returns the version of the xine library to which we're linked. Static
+method.
+
+Example:
+
+ my $version = Video::Xine->get_version(); # returns something like '1.1.8'
+
 =head3 set_param()
 
   set_param($param, $value);
 
-Sets an engine parameter. Currently, this is only useful for setting
-the Xine logging level.
+Sets an engine parameter.
+
+Xine engine parameter constants:
+
+=over
+
+=item *
+
+XINE_ENGINE_PARAM_VERBOSITY
+
+Possible values are XINE_VERBOSITY_NONE (0), XINE_VERBOSITY_LOG (1),
+and XINE_VERBOSITY_DEBUG.
+
+=back
 
 =head3 stream_new()
 
@@ -579,6 +616,12 @@ Returns the play status of the stream.
 
 =item *
 
+XINE_STATUS_IDLE
+
+The stream is idle.
+
+=item *
+
 XINE_STATUS_STOP
 
 Indicates that the stream is stopped.
@@ -589,11 +632,44 @@ XINE_STATUS_PLAY
 
 Indicates that the stream is playing.
 
+=item *
+
+XINE_STATUS_QUIT
+
 =back
 
 =head3 get_error()
 
-Returns the last error message.
+Returns the error code for the last error. Xine error codes are:
+
+=over
+
+=item *
+
+XINE_ERROR_NONE
+
+=item *
+
+XINE_ERROR_NO_INPUT_PLUGIN
+
+=item *
+
+XINE_ERROR_NO_DEMUX_PLUGIN
+
+=item *
+
+XINE_ERROR_DEMUX_FAILED
+
+=item *
+
+XINE_ERROR_MALFORMED_URL
+
+=item *
+
+XINE_ERROR_INPUT_FAILED
+
+
+=back
 
 =head3 set_param()
 

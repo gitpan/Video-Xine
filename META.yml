@@ -1,10 +1,12 @@
 ---
 name: Video-Xine
-version: 0.10
+version: 0.11
 author:
   - 'Stephen Nelson, E<lt>stephen@cpan.orgE<gt>'
 abstract: Perl interface to libxine
 license: perl
+resources:
+  license: http://dev.perl.org/licenses/
 requires:
   ExtUtils::CBuilder: 0
   Module::Build: 0
@@ -12,14 +14,10 @@ requires:
 recommends:
   X11::FullScreen: 0
   perl: 5.8.5
-generated_by: Module::Build version 0.2808
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.10
+    version: 0.11
   Video::Xine::Driver::Audio:
     file: lib/Video/Xine.pm
   Video::Xine::Driver::Video:
@@ -30,5 +28,7 @@ provides:
     file: lib/Video/Xine.pm
   Video::Xine::Stream:
     file: lib/Video/Xine.pm
-resources:
-  license: http://dev.perl.org/licenses/
+generated_by: Module::Build version 0.2808
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
