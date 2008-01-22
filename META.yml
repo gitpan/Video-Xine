@@ -1,6 +1,6 @@
 ---
 name: Video-Xine
-version: 0.13
+version: 0.14
 author:
   - 'Stephen Nelson, E<lt>stephen@cpan.orgE<gt>'
 abstract: Perl interface to libxine
@@ -17,19 +17,21 @@ recommends:
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.13
+    version: 0.14
   Video::Xine::Driver::Audio:
-    file: lib/Video/Xine.pm
+    file: lib/Video/Xine/Driver/Audio.pm
   Video::Xine::Driver::Video:
-    file: lib/Video/Xine.pm
+    file: lib/Video/Xine/Driver/Video.pm
   Video::Xine::Event:
-    file: lib/Video/Xine.pm
+    file: lib/Video/Xine/Event.pm
   Video::Xine::Event::Queue:
-    file: lib/Video/Xine.pm
+    file: lib/Video/Xine/Event/Queue.pm
   Video::Xine::OSD:
-    file: lib/Video/Xine.pm
+    file: lib/Video/Xine/OSD.pm
   Video::Xine::Stream:
-    file: lib/Video/Xine.pm
+    file: lib/Video/Xine/Stream.pm
+  Video::Xine::Utility:
+    file: lib/Video/Xine/Utility.pm
 generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

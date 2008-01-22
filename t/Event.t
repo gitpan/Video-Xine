@@ -4,8 +4,10 @@ use warnings;
 use FindBin '$Bin';
 use Test::More tests => 1;
 use Video::Xine;
+use Video::Xine::Stream ':status_constants';
+use Video::Xine::Event ':type_constants';
 
-our $DEBUG = 0;
+our $DEBUG = 1;
 
 SKIP: {
 
@@ -36,7 +38,7 @@ SKIP: {
 					 $display->getHeight(),
 					 $display->getPixelAspect()
 					);
-    $driver = Video::Xine::Driver::Video->new($xine,"auto", 1, $x11_visual)
+    $driver = Video::Xine::Driver::Video->new($xine,"auto", 1, $x11_visual, $display)
 	or skip("Unable to load video driver", 1);
   }
   else {
@@ -59,16 +61,13 @@ SKIP: {
     while ( my $event = $queue->get_event() ) {
       print "Event: ", $event->get_type(), "\n"
 	if $DEBUG;
-      $event->get_type() == 1 and last PLAY;
+      $event->get_type() == XINE_EVENT_UI_PLAYBACK_FINISHED and last PLAY;
     }
     sleep(1);
   }
 
   ok(1);
 
-  # Avoid closing segfault (!)
-  $null_audio = undef;
-  $driver = undef;
 }
 
 
