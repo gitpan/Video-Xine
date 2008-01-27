@@ -2,6 +2,8 @@ package Video::Xine::Stream;
 
 use Video::Xine;
 
+use DateTime;
+
 use base 'Exporter';
 
 our @EXPORT_OK = qw/
@@ -85,7 +87,20 @@ our @EXPORT_OK = qw/
   XINE_STREAM_INFO_DVD_ANGLE_NUMBER
   XINE_STREAM_INFO_DVD_ANGLE_COUNT
 
-  /;
+  XINE_META_INFO_TITLE
+  XINE_META_INFO_COMMENT
+  XINE_META_INFO_ARTIST
+  XINE_META_INFO_GENRE
+  XINE_META_INFO_ALBUM
+  XINE_META_INFO_YEAR
+  XINE_META_INFO_VIDEOCODEC
+  XINE_META_INFO_AUDIOCODEC
+  XINE_META_INFO_SYSTEMLAYER
+  XINE_META_INFO_INPUT_PLUGIN
+  XINE_META_INFO_CDINDEX_DISCID
+  XINE_META_INFO_TRACK_NUMBER
+
+/;
 
 # xine_get_stream_info
 use constant {
@@ -125,6 +140,22 @@ use constant {
     XINE_STREAM_INFO_DVD_CHAPTER_COUNT  => 33,
     XINE_STREAM_INFO_DVD_ANGLE_NUMBER   => 34,
     XINE_STREAM_INFO_DVD_ANGLE_COUNT    => 35
+};
+
+# xine_get_meta_info
+use constant {
+   XINE_META_INFO_TITLE => 0,
+   XINE_META_INFO_COMMENT => 1,
+   XINE_META_INFO_ARTIST => 2,
+   XINE_META_INFO_GENRE => 3,
+   XINE_META_INFO_ALBUM => 4,
+   XINE_META_INFO_YEAR => 5,
+   XINE_META_INFO_VIDEOCODEC => 6,
+   XINE_META_INFO_AUDIOCODEC => 7,
+   XINE_META_INFO_SYSTEMLAYER => 8,
+   XINE_META_INFO_INPUT_PLUGIN => 9,
+   XINE_META_INFO_CDINDEX_DISCID => 10,
+   XINE_META_INFO_TRACK_NUMBER => 11
 };
 
 our %EXPORT_TAGS = (
@@ -169,6 +200,22 @@ our %EXPORT_TAGS = (
           XINE_PARAM_AUDIO_AMP_MUTE
           XINE_PARAM_FINE_SPEED
           /
+    ],
+    meta_constants => [
+      qw/
+          XINE_META_INFO_TITLE
+          XINE_META_INFO_COMMENT
+          XINE_META_INFO_ARTIST
+          XINE_META_INFO_GENRE
+          XINE_META_INFO_ALBUM
+          XINE_META_INFO_YEAR
+          XINE_META_INFO_VIDEOCODEC
+          XINE_META_INFO_AUDIOCODEC
+          XINE_META_INFO_SYSTEMLAYER
+          XINE_META_INFO_INPUT_PLUGIN
+          XINE_META_INFO_CDINDEX_DISCID
+          XINE_META_INFO_TRACK_NUMBER
+      /
     ],
     info_constants => [
         qw/
@@ -350,6 +397,18 @@ sub get_pos_length {
     return ( $pos_stream, $pos_time, $length_time );
 }
 
+sub get_duration {
+    my $self = shift;
+
+    my (undef, undef, $msec_dur) = $self->get_pos_length();
+
+    my $secs = int($msec_dur / 1000);
+
+    my $millis = $msec_dur % 1000;
+
+    return DateTime::Duration->new( seconds => $secs, nanoseconds => ($millis * 1000) );
+}
+
 sub get_status {
     my $self = shift;
     return xine_get_status( $self->{'stream'} );
@@ -377,6 +436,14 @@ sub get_info {
     my ($info) = @_;
 
     return xine_get_stream_info( $self->{'stream'}, $info );
+}
+
+sub get_meta_info {
+    my $self = shift;
+    my ($info) = @_;
+
+    return xine_get_meta_info( $self->{'stream'}, $info);
+
 }
 
 sub osd_new {
@@ -509,10 +576,14 @@ parameter constants.
 Returns a parameter from the stream. C<$param> should be a xine
 parameter constant.
 
-=head3 get_info($param)
+=head3 get_info()
+
+  my $info = $s->get_info($info_const)
 
 Returns information about the stream, such as its bit rate, audio
-channels, width, or height. C<$param> should be a xine info constant.
+channels, width, or height. C<$info_const> should be a xine info constant.
+
+=head3 get_meta_info()
 
 =head2 PARAM CONSTANTS
 
@@ -641,5 +712,215 @@ XINE_PARAM_AUDIO_AMP_MUTE
 XINE_PARAM_FINE_SPEED
 
 =back
+
+=head2 INFO CONSTANTS
+
+Exported in the tag 'info_constants'.
+
+=over
+
+=item *
+
+XINE_STREAM_INFO_BITRATE
+
+=item *
+
+XINE_STREAM_INFO_SEEKABLE
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_WIDTH
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_HEIGHT
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_RATIO
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_CHANNELS
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_STREAMS
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_BITRATE
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_FOURCC
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_HANDLED
+
+=item *
+
+XINE_STREAM_INFO_FRAME_DURATION
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_CHANNELS
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_BITS
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_SAMPLERATE
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_BITRATE
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_FOURCC
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_HANDLED
+
+=item *
+
+XINE_STREAM_INFO_HAS_CHAPTERS
+
+=item *
+
+XINE_STREAM_INFO_HAS_VIDEO
+
+=item *
+
+XINE_STREAM_INFO_HAS_AUDIO
+
+=item *
+
+XINE_STREAM_INFO_IGNORE_VIDEO
+
+=item *
+
+XINE_STREAM_INFO_IGNORE_AUDIO
+
+=item *
+
+XINE_STREAM_INFO_IGNORE_SPU
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_HAS_STILL
+
+=item *
+
+XINE_STREAM_INFO_MAX_AUDIO_CHANNEL
+
+=item *
+
+XINE_STREAM_INFO_MAX_SPU_CHANNEL
+
+=item *
+
+XINE_STREAM_INFO_AUDIO_MODE
+
+=item *
+
+XINE_STREAM_INFO_SKIPPED_FRAMES
+
+=item *
+
+XINE_STREAM_INFO_DISCARDED_FRAMES
+
+=item *
+
+XINE_STREAM_INFO_VIDEO_AFD
+
+=item *
+
+XINE_STREAM_INFO_DVD_TITLE_NUMBER
+
+=item *
+
+XINE_STREAM_INFO_DVD_TITLE_COUNT
+
+=item *
+
+XINE_STREAM_INFO_DVD_CHAPTER_NUMBER
+
+=item *
+
+XINE_STREAM_INFO_DVD_CHAPTER_COUNT
+
+=item *
+
+XINE_STREAM_INFO_DVD_ANGLE_NUMBER
+
+=item *
+
+XINE_STREAM_INFO_DVD_ANGLE_COUNT
+
+=back
+
+=head2 META CONSTANTS
+
+Exported in meta_constants.
+
+=over
+
+=item *
+
+XINE_META_INFO_TITLE
+
+=item *
+
+XINE_META_INFO_COMMENT
+
+=item *
+
+XINE_META_INFO_ARTIST
+
+=item *
+
+XINE_META_INFO_GENRE
+
+=item *
+
+XINE_META_INFO_ALBUM
+
+=item *
+
+XINE_META_INFO_YEAR
+
+=item *
+
+XINE_META_INFO_VIDEOCODEC
+
+=item *
+
+XINE_META_INFO_AUDIOCODEC
+
+=item *
+
+XINE_META_INFO_SYSTEMLAYER
+
+=item *
+
+XINE_META_INFO_INPUT_PLUGIN
+
+=item *
+
+XINE_META_INFO_CDINDEX_DISCID
+
+=item *
+
+XINE_META_INFO_TRACK_NUMBER
+
+=head1 SEE ALSO
+
+L<Video::Xine>
 
 =cut

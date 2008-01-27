@@ -1,6 +1,6 @@
 ---
 name: Video-Xine
-version: 0.15
+version: 0.16
 author:
   - 'Stephen Nelson, E<lt>stephen@cpan.orgE<gt>'
 abstract: Perl interface to libxine
@@ -8,16 +8,18 @@ license: perl
 resources:
   license: http://dev.perl.org/licenses/
 requires:
+  DateTime: 0
   ExtUtils::CBuilder: 0
   Module::Build: 0
   Test::More: 0.01
 recommends:
+  DateTime::Format::Duration: 0
   X11::FullScreen: 0
   perl: 5.8.5
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.15
+    version: 0.16
   Video::Xine::Driver::Audio:
     file: lib/Video/Xine/Driver/Audio.pm
   Video::Xine::Driver::Video:
