@@ -14,7 +14,7 @@ use Video::Xine::Event;
 use Video::Xine::Event::Queue;
 use Video::Xine::OSD;
 
-our $VERSION = '0.17';
+our $VERSION = '0.18';
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
@@ -126,6 +126,9 @@ Video::Xine - Perl interface to libxine
 =head1 SYNOPSIS
 
   use Video::Xine;
+  use Video::Xine::Stream;
+  use Video::Xine::Driver::Audio;
+  use Video::Xine::Driver::Video qw/:constants/;
 
   # Create and initialize the Xine object
   my $xine = Video::Xine->new(
@@ -133,9 +136,12 @@ Video::Xine - Perl interface to libxine
   );
 
   # Load a video driver
-  my $video_driver = Video::Xine::Driver::Video->new($xine,"auto",1,$x11_visual);
+  my $video_driver = Video::Xine::Driver::Video->new($xine,"auto", XINE_VISUAL_TYPE_X11,$x11_visual);
 
-  # Create a new stream (put your video driver under $DRIVER)
+  # Load an audio driver
+  my $audio_driver = Video::Xine::Driver::Audio->new($xine, "auto");
+
+  # Create a new stream
   my $stream = $xine->stream_new($AUDIO_DRIVER,$VIDEO_DRIVER);
 
   # Open a file on the stream
@@ -151,7 +157,7 @@ Video::Xine - Perl interface to libxine
      or die "Couldn't play stream: ", $xine->get_error();
 
   # Play the stream to the end
-  while ( $xine->get_status() == XINE_STATUS_PLAY ) {
+  while ( $stream->get_status() == XINE_STATUS_PLAY ) {
     sleep(1);
   }
 

@@ -1,6 +1,6 @@
 ---
 name: Video-Xine
-version: 0.17
+version: 0.18
 author:
   - 'Stephen Nelson, E<lt>stephen@cpan.orgE<gt>'
 abstract: Perl interface to libxine
@@ -19,7 +19,7 @@ recommends:
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.17
+    version: 0.18
   Video::Xine::Driver::Audio:
     file: lib/Video/Xine/Driver/Audio.pm
   Video::Xine::Driver::Video:
