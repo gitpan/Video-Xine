@@ -2,7 +2,6 @@ bin/xine_length
 bin/xine_play
 Build.PL
 ChangeLog
-inc/Devel/CheckLib.pm
 lib/Video/ppport.h
 lib/Video/Xine.pm
 lib/Video/Xine.xs
@@ -12,10 +11,8 @@ lib/Video/Xine/Event.pm
 lib/Video/Xine/Event/Queue.pm
 lib/Video/Xine/OSD.pm
 lib/Video/Xine/Stream.pm
-lib/Video/Xine/Utility.pm
-Makefile.PL
+lib/Video/Xine/Util.pm
 MANIFEST
-META.yml
 README
 t/Event.t
 t/osd.t
@@ -26,3 +23,5 @@ t/time_015.avi
 t/Video-Xine.t
 t/X11.t
 typemap
+META.yml
+META.json

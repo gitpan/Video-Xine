@@ -1,0 +1,83 @@
+{
+   "abstract" : "Perl interface to libxine",
+   "author" : [
+      "Stephen Nelson <stephenenelson@mac.com>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Video-Xine",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::CBuilder" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.40"
+         }
+      },
+      "runtime" : {
+         "recommends" : {
+            "DateTime::Format::Duration" : "0",
+            "perl" : "v5.8.5"
+         },
+         "requires" : {
+            "DateTime" : "0",
+            "ExtUtils::CBuilder" : "0",
+            "ExtUtils::PkgConfig" : "0",
+            "Module::Build" : "0",
+            "Test::More" : "0.01",
+            "X11::FullScreen" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "Video::Xine" : {
+         "file" : "lib/Video/Xine.pm",
+         "version" : "0.19"
+      },
+      "Video::Xine::Driver::Audio" : {
+         "file" : "lib/Video/Xine/Driver/Audio.pm",
+         "version" : 0
+      },
+      "Video::Xine::Driver::Video" : {
+         "file" : "lib/Video/Xine/Driver/Video.pm",
+         "version" : 0
+      },
+      "Video::Xine::Event" : {
+         "file" : "lib/Video/Xine/Event.pm",
+         "version" : 0
+      },
+      "Video::Xine::Event::Queue" : {
+         "file" : "lib/Video/Xine/Event/Queue.pm",
+         "version" : 0
+      },
+      "Video::Xine::OSD" : {
+         "file" : "lib/Video/Xine/OSD.pm",
+         "version" : 0
+      },
+      "Video::Xine::Stream" : {
+         "file" : "lib/Video/Xine/Stream.pm",
+         "version" : 0
+      },
+      "Video::Xine::Util" : {
+         "file" : "lib/Video/Xine/Util.pm",
+         "version" : 0
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.19"
+}
