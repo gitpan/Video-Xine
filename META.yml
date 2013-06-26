@@ -5,7 +5,8 @@ author:
 build_requires:
   ExtUtils::CBuilder: 0
 configure_requires:
-  Module::Build: 0.40
+  ExtUtils::PkgConfig: 0
+  Module::Build: 0
 dynamic_config: 1
 generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.120921'
 license: perl
@@ -16,7 +17,7 @@ name: Video-Xine
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.19
+    version: 0.20
   Video::Xine::Driver::Audio:
     file: lib/Video/Xine/Driver/Audio.pm
     version: 0
@@ -43,11 +44,9 @@ recommends:
   perl: v5.8.5
 requires:
   DateTime: 0
-  ExtUtils::CBuilder: 0
-  ExtUtils::PkgConfig: 0
-  Module::Build: 0
-  Test::More: 0.01
   X11::FullScreen: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.19
+version: 0.20
+x_test_requires:
+  Test::More: 0.01
