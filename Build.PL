@@ -1,3 +1,11 @@
+use lib qw(inc);
+use Devel::CheckLib;
+
+check_lib_or_exit(
+    lib => [qw(xine)]
+);
+
+
 use strict;
 use warnings;
 
@@ -22,6 +30,7 @@ my $build = Module::Build->new(
                    configure_requires => {
 					    'ExtUtils::PkgConfig' => '0',
 					    'Module::Build' => '0',
+					    'Devel::CheckLib' => '0'
                    },
                    build_requires => {
 					    'ExtUtils::CBuilder' => '0',                   

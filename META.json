@@ -21,6 +21,7 @@
       },
       "configure" : {
          "requires" : {
+            "Devel::CheckLib" : "0",
             "ExtUtils::PkgConfig" : "0",
             "Module::Build" : "0"
          }
@@ -39,7 +40,7 @@
    "provides" : {
       "Video::Xine" : {
          "file" : "lib/Video/Xine.pm",
-         "version" : "0.20"
+         "version" : "0.21"
       },
       "Video::Xine::Driver::Audio" : {
          "file" : "lib/Video/Xine/Driver/Audio.pm",
@@ -76,7 +77,7 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.20",
+   "version" : "0.21",
    "x_test_requires" : {
       "Test::More" : "0.01"
    }

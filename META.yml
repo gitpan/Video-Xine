@@ -5,6 +5,7 @@ author:
 build_requires:
   ExtUtils::CBuilder: 0
 configure_requires:
+  Devel::CheckLib: 0
   ExtUtils::PkgConfig: 0
   Module::Build: 0
 dynamic_config: 1
@@ -17,7 +18,7 @@ name: Video-Xine
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.20
+    version: 0.21
   Video::Xine::Driver::Audio:
     file: lib/Video/Xine/Driver/Audio.pm
     version: 0
@@ -47,6 +48,6 @@ requires:
   X11::FullScreen: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.20
+version: 0.21
 x_test_requires:
   Test::More: 0.01
