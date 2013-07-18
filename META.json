@@ -28,19 +28,19 @@
       },
       "runtime" : {
          "recommends" : {
-            "DateTime::Format::Duration" : "0",
-            "perl" : "v5.8.5"
+            "DateTime::Format::Duration" : "0"
          },
          "requires" : {
             "DateTime" : "0",
-            "X11::FullScreen" : "0"
+            "X11::FullScreen" : "0",
+            "perl" : "v5.8.3"
          }
       }
    },
    "provides" : {
       "Video::Xine" : {
          "file" : "lib/Video/Xine.pm",
-         "version" : "0.21"
+         "version" : "0.22"
       },
       "Video::Xine::Driver::Audio" : {
          "file" : "lib/Video/Xine/Driver/Audio.pm",
@@ -77,7 +77,7 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.21",
+   "version" : "0.22",
    "x_test_requires" : {
       "Test::More" : "0.01"
    }

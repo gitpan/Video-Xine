@@ -14,7 +14,7 @@ use Video::Xine::Event;
 use Video::Xine::Event::Queue;
 use Video::Xine::OSD;
 
-our $VERSION = '0.21';
+our $VERSION = '0.22';
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
@@ -67,6 +67,15 @@ sub get_version {
     my ($major, $minor, $sub);
     xine_get_version($major, $minor, $sub);
     return "$major.$minor.$sub";
+}
+
+sub check_version {
+	my $type = shift;
+	my ($major, $minor, $sub) = @_;
+	
+	my $rc = xine_check_version($major, $minor, $sub);
+	
+	return $rc;
 }
 
 sub new {
@@ -197,6 +206,12 @@ method.
 Example:
 
  my $version = Video::Xine->get_version(); # returns something like '1.1.8'
+ 
+=head3 check_version()
+
+  Video::Xine->check_version(1, 2, 1) or die "Too low!\n";
+
+Checks the provided major, minor, and point release numbers against the current Xine version and makes sure they're compatible.
 
 =head3 set_param()
 

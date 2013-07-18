@@ -72,6 +72,15 @@ xine_get_version(major, minor, sub)
 	sub
 
 #
+# Return 1 if the xine version is compatible
+#
+int
+xine_check_version (major, minor, sub)
+	int major
+	int minor
+	int sub
+
+#
 # Pre-init the xine engine. Need to call xine_init()
 # afterwards.
 #
@@ -140,6 +149,15 @@ xine_stream_new(xine,ao,vo)
         RETVAL
 
 ##
+## Establish a master-slave relationship
+##
+int xine_stream_master_slave(self, slave, affection)
+	xine_stream_t *self
+	xine_stream_t *slave
+    int affection
+
+
+##
 ## Opens a xine mrl on an existing stream.
 ##
 int
@@ -190,6 +208,13 @@ xine_stop(self)
 ##
 void
 xine_close(self)
+	xine_stream_t *self
+
+
+#
+# Eject
+#
+int  xine_eject (self) 
 	xine_stream_t *self
 
 #

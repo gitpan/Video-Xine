@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use FindBin '$Bin';
-use Test::More tests => 12;
+use Test::More tests => 13;
 BEGIN { use_ok('Video::Xine') };
 use Video::Xine::Stream qw/:status_constants/;
 
@@ -12,6 +12,9 @@ use Video::Xine::Stream qw/:status_constants/;
 my $version = Video::Xine->get_version();
 like($version, qr/^\d+\.\d+\.\d+$/, 'Version is about right');
 diag("Xine-lib version: $version");
+
+my $rc = Video::Xine->check_version(1,1,0);
+ok($rc, "check version");
 
 my $xine = Video::Xine->new()
   or die "Couldn't initialize xine";
@@ -35,12 +38,12 @@ ok(1);
 TEST1: {
   my $stream  = $xine->stream_new($null_audio);
   is($stream->get_status(), XINE_STATUS_IDLE);
-  $stream->open("$Bin/time_015.avi")
-    or die "Couldn't open '$Bin/time_015.avi'";
+  $stream->open("$Bin/video_xine_test.mp4")
+    or die "Couldn't open '$Bin/video_xine_test.mp4'";
   my ($pos_pct, $pos_time, $length_time) = $stream->get_pos_length();
   is($pos_pct, 0);
   is($pos_time, 0);
-  is($length_time, 14981);
+  is($length_time, 10010);
   $stream->play();
   is($stream->get_status(), XINE_STATUS_PLAY);
   $stream->stop();
