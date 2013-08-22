@@ -14,7 +14,7 @@ use Video::Xine::Event;
 use Video::Xine::Event::Queue;
 use Video::Xine::OSD;
 
-our $VERSION = '0.22';
+our $VERSION = '0.23';
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
@@ -130,7 +130,7 @@ __END__
 
 =head1 NAME
 
-Video::Xine - Perl interface to libxine
+Video::Xine - xine movie player interface
 
 =head1 SYNOPSIS
 
@@ -146,15 +146,16 @@ Video::Xine - Perl interface to libxine
   );
   
   # Get an X11 visual for X11::FullScreen and load a video driver
-  my $display = X11::FullScreen::Display->new(':0.0');	
-  my $fs_visual = make_x11_fs_visual($display, $display->createWindow());
-  my $video_driver = Video::Xine::Driver::Video->new($xine,"auto", XINE_VISUAL_TYPE_X11, $x11_visual);
+  my $display = X11::FullScreen->new(':0.0');	
+  $display->show();
+  my $fs_visual = make_x11_fs_visual($display);
+  my $video_driver = Video::Xine::Driver::Video->new($xine,"auto", XINE_VISUAL_TYPE_X11, $fs_visual);
 
   # Load an audio driver
   my $audio_driver = Video::Xine::Driver::Audio->new($xine, "auto");
 
   # Create a new stream
-  my $stream = $xine->stream_new($AUDIO_DRIVER,$VIDEO_DRIVER);
+  my $stream = $xine->stream_new($audio_driver, $video_driver);
 
   # Open a file on the stream
   $stream->open('file://my/movie/file.avi')
@@ -192,7 +193,7 @@ See the provided 'bin/xine_play' file for a very simple movie player that uses V
 
 =head3 new()
 
-Constructor. Takes named argument 'config_file'.
+Constructor. Takes optional named argument 'config_file'.
 
 Example:
 

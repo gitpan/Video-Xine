@@ -5,6 +5,7 @@ use warnings;
 
 use Video::Xine;
 use DateTime;
+use Carp;
 
 use base 'Exporter';
 
@@ -339,14 +340,30 @@ use constant {
 sub new {
     my $type = shift;
     my ( $xine, $audio_port, $video_port ) = @_;
+    
+    my $xine_ptr;
+    
+    if ( ref $xine eq 'Video::Xine' ) {
+    	$xine_ptr = $xine->{'xine'};
+    }
+    else {
+    	$xine_ptr = $xine;
+    }
 
     my $self = {};
-    $self->{'xine'}       = $xine;
-    $self->{'audio_port'} = $audio_port;
-    $self->{'video_port'} = $video_port;
-    $self->{'stream'} =
+    $self->{'xine'}       = $xine_ptr;
+    $self->{'audio_port'} = $audio_port or croak "Audio port required";
+    $self->{'video_port'} = $video_port or croak "Video port required";
+
+	my $stream =
       xine_stream_new( $xine, $audio_port->{'driver'},
         $video_port->{'driver'} );
+    
+    if (! defined $stream) {
+    	croak "Xine stream error: " . xine_get_error($xine);
+    }
+    
+    $self->{'stream'} = $stream;
 
     bless $self, $type;
 
@@ -560,12 +577,12 @@ Eject the stream, if possible. Returns 1 if OK, 0 if error.
 
 =head3 get_pos_length()
 
-  ($pos_pct, $pos_time, $length_time) = $s->get_pos_length();
+  ($pos_pct, $pos_time, $length_millis) = $stream->get_pos_length();
 
 Gets position / length information. C<$pos_pct> is a value between 1
 and 65535 indicating how far we've proceeded through the
 stream. C<$pos_time> gives how far we've proceeded through the stream
-in milliseconds, and C<$length_time> gives the total length of the
+in milliseconds, and C<$length_millis> gives the total length of the
 stream in milliseconds.
 
 =head3 get_status()
@@ -626,6 +643,11 @@ Returns information about the stream, such as its bit rate, audio
 channels, width, or height. C<$info_const> should be a xine info constant.
 
 =head3 get_meta_info()
+
+  my $meta_info = $stream->get_meta_info($meta_info_const)
+
+Returns meta-information about the stream, such as its title.
+C<$meta_info_const> should be a xine meta info constant; see META CONSTANTS below for details.
 
 =head2 PARAM CONSTANTS
 
@@ -909,7 +931,7 @@ XINE_STREAM_INFO_DVD_ANGLE_COUNT
 
 =head2 META CONSTANTS
 
-Exported in meta_constants.
+Exported with the C<:meta_constants> tag.
 
 =over
 

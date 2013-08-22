@@ -1,5 +1,5 @@
 ---
-abstract: 'Perl interface to libxine'
+abstract: 'xine movie player interface'
 author:
   - 'Stephen Nelson <stephenenelson@mac.com>'
 build_requires:
@@ -9,7 +9,7 @@ configure_requires:
   ExtUtils::PkgConfig: 0
   Module::Build: 0
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.132140'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -18,36 +18,31 @@ name: Video-Xine
 provides:
   Video::Xine:
     file: lib/Video/Xine.pm
-    version: 0.22
+    version: 0.23
   Video::Xine::Driver::Audio:
     file: lib/Video/Xine/Driver/Audio.pm
-    version: 0
   Video::Xine::Driver::Video:
     file: lib/Video/Xine/Driver/Video.pm
-    version: 0
   Video::Xine::Event:
     file: lib/Video/Xine/Event.pm
-    version: 0
   Video::Xine::Event::Queue:
     file: lib/Video/Xine/Event/Queue.pm
-    version: 0
   Video::Xine::OSD:
     file: lib/Video/Xine/OSD.pm
-    version: 0
   Video::Xine::Stream:
     file: lib/Video/Xine/Stream.pm
-    version: 0
   Video::Xine::Util:
     file: lib/Video/Xine/Util.pm
-    version: 0
-recommends:
-  DateTime::Format::Duration: 0
 requires:
   DateTime: 0
-  X11::FullScreen: 0
+  DateTime::Format::Duration: 0
+  X11::FullScreen: 0.992
   perl: v5.8.3
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.22
+  repository: https://github.com/stephenenelson/video-xine
+version: 0.23
 x_test_requires:
+  Test::Kwalitee: 0
   Test::More: 0.01
+  Test::Pod::Coverage: 0

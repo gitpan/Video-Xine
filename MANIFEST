@@ -2,6 +2,7 @@ bin/xine_length
 bin/xine_play
 Build.PL
 ChangeLog
+ext/xine_test_stills
 inc/Devel/CheckLib.pm
 lib/Video/ppport.h
 lib/Video/Xine.pm
@@ -20,13 +21,12 @@ README
 t/Event.t
 t/kwalitee.t
 t/osd.t
-t/pod.t
-t/pod_coverage.t
 t/stream.t
 t/test.ogg
 t/test_config
-t/time_015.avi
 t/Video-Xine.t
 t/video_xine_test.mp4
 t/X11.t
 typemap
+xt/pod.t
+xt/pod_coverage.t

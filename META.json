@@ -1,10 +1,10 @@
 {
-   "abstract" : "Perl interface to libxine",
+   "abstract" : "xine movie player interface",
    "author" : [
       "Stephen Nelson <stephenenelson@mac.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.132140",
    "license" : [
       "perl_5"
    ],
@@ -27,12 +27,10 @@
          }
       },
       "runtime" : {
-         "recommends" : {
-            "DateTime::Format::Duration" : "0"
-         },
          "requires" : {
             "DateTime" : "0",
-            "X11::FullScreen" : "0",
+            "DateTime::Format::Duration" : "0",
+            "X11::FullScreen" : "0.992",
             "perl" : "v5.8.3"
          }
       }
@@ -40,45 +38,43 @@
    "provides" : {
       "Video::Xine" : {
          "file" : "lib/Video/Xine.pm",
-         "version" : "0.22"
+         "version" : "0.23"
       },
       "Video::Xine::Driver::Audio" : {
-         "file" : "lib/Video/Xine/Driver/Audio.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/Driver/Audio.pm"
       },
       "Video::Xine::Driver::Video" : {
-         "file" : "lib/Video/Xine/Driver/Video.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/Driver/Video.pm"
       },
       "Video::Xine::Event" : {
-         "file" : "lib/Video/Xine/Event.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/Event.pm"
       },
       "Video::Xine::Event::Queue" : {
-         "file" : "lib/Video/Xine/Event/Queue.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/Event/Queue.pm"
       },
       "Video::Xine::OSD" : {
-         "file" : "lib/Video/Xine/OSD.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/OSD.pm"
       },
       "Video::Xine::Stream" : {
-         "file" : "lib/Video/Xine/Stream.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/Stream.pm"
       },
       "Video::Xine::Util" : {
-         "file" : "lib/Video/Xine/Util.pm",
-         "version" : 0
+         "file" : "lib/Video/Xine/Util.pm"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
-      ]
+      ],
+      "repository" : {
+         "url" : "https://github.com/stephenenelson/video-xine"
+      }
    },
-   "version" : "0.22",
+   "version" : "0.23",
    "x_test_requires" : {
-      "Test::More" : "0.01"
+      "Test::Kwalitee" : "0",
+      "Test::More" : "0.01",
+      "Test::Pod::Coverage" : "0"
    }
 }

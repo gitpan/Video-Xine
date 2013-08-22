@@ -153,16 +153,16 @@ sub make_x11_driver {
 
     my $display_str = defined $ENV{'DISPLAY'} ? $ENV{'DISPLAY'} : ':0.0';
 
-    my $display = X11::FullScreen::Display->new($display_str)
+    my $display = X11::FullScreen->new($display_str)
       or do {
-        warn("X11::FullScreen::Display does not initialize");
+        warn("X11::FullScreen did not initialize");
         return;
       };
 
-    my $window = $display->createWindow();
+    my $window = $display->show();
     $display->sync();
     my $x11_visual =
-      Video::Xine::Util::make_x11_fs_visual( $display, $window );
+      Video::Xine::Util::make_x11_fs_visual( $display );
 
     my $driver =
       Video::Xine::Driver::Video->new( $xine, "auto", XINE_VISUAL_TYPE_X11,
@@ -210,7 +210,7 @@ xine_play [options] [mrl ...]
     --no-audio          Turn off audio play
     --no-video          Turn off video play
     --verbosity         Set verbosity level (0-2)
-    --broadcaster-port  Set the RTP broadcast port
+    --broadcaster-port  Set the master port
     --event-wait        Use event-wait (not event-get) to get events
     --frame-report      Print out discarded and skipped frames after each event
 
@@ -243,7 +243,7 @@ output), or 2 (debug output).
 =item B<--broadcaster-port>
 
 If set, Xine will attempt to open a port on which each stream will be
-broadcast.
+broadcast. Use 'xine slave://address:port' in another instance to display this data.
 
 =item B<--event-wait>
 
