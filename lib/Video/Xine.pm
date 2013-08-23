@@ -1,4 +1,7 @@
 package Video::Xine;
+{
+  $Video::Xine::VERSION = '0.24';
+}
 
 use 5.008003;
 use strict;
@@ -13,8 +16,6 @@ use Video::Xine::Driver::Video;
 use Video::Xine::Event;
 use Video::Xine::Event::Queue;
 use Video::Xine::OSD;
-
-our $VERSION = '0.23';
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(
@@ -37,7 +38,7 @@ our @EXPORT = qw(
 );
 
 require XSLoader;
-XSLoader::load('Video::Xine', $VERSION);
+XSLoader::load('Video::Xine', $Video::Xine::VERSION);
 
 # Preloaded methods go here.
 

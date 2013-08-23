@@ -1,4 +1,7 @@
 package Video::Xine::Event::Queue;
+{
+  $Video::Xine::Event::Queue::VERSION = '0.24';
+}
 
 use strict;
 use warnings;

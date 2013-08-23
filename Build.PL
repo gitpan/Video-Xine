@@ -1,54 +1,68 @@
-use lib qw(inc);
-use Devel::CheckLib;
-
-check_lib_or_exit( lib => [qw(xine)] );
 
 use strict;
 use warnings;
 
-use Module::Build;
-use Config;
-use ExtUtils::PkgConfig;
+use Module::Build 0.3601;
+use lib qw{inc}; use PkgConfBuild;
 
-### Based on Build.PL for Image::Imlib2
-if ( !$Config{'usethreads'} ) {
-    warn "Unable to install. The Xine module requires multithread support.\n";
-    exit(0);
-}
-
-# We need to find xine-config
-my %xine_config = ExtUtils::PkgConfig->find('libxine');
-
-my $build = Module::Build->new(
-    extra_compiler_flags => $xine_config{'cflags'},
-    extra_linker_flags   => $xine_config{'libs'},
-    license              => 'perl',
-    module_name          => 'Video::Xine',
-    configure_requires   => {
-        'ExtUtils::PkgConfig' => '0',
-        'Module::Build'       => '0',
-        'Devel::CheckLib'     => '0'
-    },
-    build_requires => {
-        'ExtUtils::CBuilder' => '0',
-    },
-    test_requires => {
-        'Test::More' => '0.01',
-        'Test::Kwalitee' => 0,
-        'Test::Pod::Coverage' => 0
-    },
-    requires => {
-        'DateTime'        => '0',
-        'DateTime::Format::Duration' => 0,
-        'X11::FullScreen' => '0.992',
-        'perl'            => '5.8.3'
-    },
-    meta_merge => {
-    	resources => {
-    		repository => 'https://github.com/stephenenelson/video-xine'
-    	}
-    }
+my %module_build_args = (
+  "build_requires" => {
+    "Devel::CheckLib" => "1.01",
+    "ExtUtils::PkgConfig" => "1.14",
+    "Module::Build" => "0.3601"
+  },
+  "configure_requires" => {
+    "Module::Build" => "0.3601"
+  },
+  "dist_abstract" => "xine movie player interface",
+  "dist_author" => [
+    "Stephen Nelson <stephenenelson\@mac.com>"
+  ],
+  "dist_name" => "Video-Xine",
+  "dist_version" => "0.24",
+  "license" => "perl",
+  "module_name" => "Video::Xine",
+  "recommends" => {},
+  "recursive_test_files" => 1,
+  "requires" => {
+    "Carp" => 0,
+    "DateTime" => 0,
+    "Exporter" => 0,
+    "Getopt::Long" => 0,
+    "Pod::Usage" => 0,
+    "X11::FullScreen" => 0,
+    "XSLoader" => 0,
+    "base" => 0,
+    "constant" => 0,
+    "perl" => "v5.8.3",
+    "strict" => 0,
+    "warnings" => 0
+  },
+  "script_files" => [
+    "bin/xine_length",
+    "bin/xine_play"
+  ],
+  "test_requires" => {
+    "FindBin" => 0,
+    "Test::Kwalitee" => 0,
+    "Test::More" => 0
+  }
 );
 
-$build->create_build_script();
 
+unless ( eval { Module::Build->VERSION(0.4004) } ) {
+  my $tr = delete $module_build_args{test_requires};
+  my $br = $module_build_args{build_requires};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
+
+my $build = PkgConfBuild->new(%module_build_args);
+
+$build->create_build_script;

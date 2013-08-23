@@ -1,4 +1,7 @@
 package Video::Xine::Driver::Audio;
+{
+  $Video::Xine::Driver::Audio::VERSION = '0.24';
+}
 
 use strict;
 use warnings;

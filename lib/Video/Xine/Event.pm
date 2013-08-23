@@ -1,4 +1,7 @@
 package Video::Xine::Event;
+{
+  $Video::Xine::Event::VERSION = '0.24';
+}
 
 use strict;
 use warnings;

@@ -3,8 +3,8 @@
    "author" : [
       "Stephen Nelson <stephenenelson@mac.com>"
    ],
-   "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4007, CPAN::Meta::Converter version 2.132140",
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140",
    "license" : [
       "perl_5"
    ],
@@ -16,65 +16,50 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::CBuilder" : "0"
+            "Devel::CheckLib" : "1.01",
+            "ExtUtils::PkgConfig" : "1.14",
+            "Module::Build" : "0.3601"
          }
       },
       "configure" : {
          "requires" : {
-            "Devel::CheckLib" : "0",
-            "ExtUtils::PkgConfig" : "0",
-            "Module::Build" : "0"
+            "Module::Build" : "0.3601"
          }
       },
       "runtime" : {
          "requires" : {
+            "Carp" : "0",
             "DateTime" : "0",
-            "DateTime::Format::Duration" : "0",
-            "X11::FullScreen" : "0.992",
-            "perl" : "v5.8.3"
+            "Exporter" : "0",
+            "Getopt::Long" : "0",
+            "Pod::Usage" : "0",
+            "X11::FullScreen" : "0",
+            "XSLoader" : "0",
+            "base" : "0",
+            "constant" : "0",
+            "perl" : "v5.8.3",
+            "strict" : "0",
+            "warnings" : "0"
          }
-      }
-   },
-   "provides" : {
-      "Video::Xine" : {
-         "file" : "lib/Video/Xine.pm",
-         "version" : "0.23"
       },
-      "Video::Xine::Driver::Audio" : {
-         "file" : "lib/Video/Xine/Driver/Audio.pm"
-      },
-      "Video::Xine::Driver::Video" : {
-         "file" : "lib/Video/Xine/Driver/Video.pm"
-      },
-      "Video::Xine::Event" : {
-         "file" : "lib/Video/Xine/Event.pm"
-      },
-      "Video::Xine::Event::Queue" : {
-         "file" : "lib/Video/Xine/Event/Queue.pm"
-      },
-      "Video::Xine::OSD" : {
-         "file" : "lib/Video/Xine/OSD.pm"
-      },
-      "Video::Xine::Stream" : {
-         "file" : "lib/Video/Xine/Stream.pm"
-      },
-      "Video::Xine::Util" : {
-         "file" : "lib/Video/Xine/Util.pm"
+      "test" : {
+         "recommends" : {
+            "X11::FullScreen" : "0.993"
+         },
+         "requires" : {
+            "FindBin" : "0",
+            "Test::Kwalitee" : "0",
+            "Test::More" : "0"
+         }
       }
    },
    "release_status" : "stable",
    "resources" : {
-      "license" : [
-         "http://dev.perl.org/licenses/"
-      ],
       "repository" : {
+         "type" : "git",
          "url" : "https://github.com/stephenenelson/video-xine"
       }
    },
-   "version" : "0.23",
-   "x_test_requires" : {
-      "Test::Kwalitee" : "0",
-      "Test::More" : "0.01",
-      "Test::Pod::Coverage" : "0"
-   }
+   "version" : "0.24"
 }
+

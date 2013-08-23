@@ -1,4 +1,7 @@
 package Video::Xine::Util;
+{
+  $Video::Xine::Util::VERSION = '0.24';
+}
 
 use strict;
 use warnings;
