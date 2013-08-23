@@ -1,6 +1,6 @@
 package Video::Xine::Stream;
 {
-  $Video::Xine::Stream::VERSION = '0.24';
+  $Video::Xine::Stream::VERSION = '0.25';
 }
 
 use strict;

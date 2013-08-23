@@ -1,6 +1,6 @@
 package Video::Xine::OSD;
 {
-  $Video::Xine::OSD::VERSION = '0.24';
+  $Video::Xine::OSD::VERSION = '0.25';
 }
 
 use strict;

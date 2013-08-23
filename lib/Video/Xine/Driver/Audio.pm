@@ -1,6 +1,6 @@
 package Video::Xine::Driver::Audio;
 {
-  $Video::Xine::Driver::Audio::VERSION = '0.24';
+  $Video::Xine::Driver::Audio::VERSION = '0.25';
 }
 
 use strict;

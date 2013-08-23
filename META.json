@@ -16,13 +16,13 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Devel::CheckLib" : "1.01",
-            "ExtUtils::PkgConfig" : "1.14",
             "Module::Build" : "0.3601"
          }
       },
       "configure" : {
          "requires" : {
+            "Devel::CheckLib" : "1.01",
+            "ExtUtils::PkgConfig" : "1.14",
             "Module::Build" : "0.3601"
          }
       },
@@ -60,6 +60,6 @@
          "url" : "https://github.com/stephenenelson/video-xine"
       }
    },
-   "version" : "0.24"
+   "version" : "0.25"
 }
 
