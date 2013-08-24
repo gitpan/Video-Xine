@@ -1,6 +1,6 @@
 package Video::Xine::Event::Queue;
 {
-  $Video::Xine::Event::Queue::VERSION = '0.25';
+  $Video::Xine::Event::Queue::VERSION = '0.26';
 }
 
 use strict;

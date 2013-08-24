@@ -19,7 +19,7 @@ my %module_build_args = (
     "Stephen Nelson <stephenenelson\@mac.com>"
   ],
   "dist_name" => "Video-Xine",
-  "dist_version" => "0.25",
+  "dist_version" => "0.26",
   "license" => "perl",
   "module_name" => "Video::Xine",
   "recommends" => {},

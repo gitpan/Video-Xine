@@ -1,6 +1,6 @@
 package Video::Xine;
 {
-  $Video::Xine::VERSION = '0.25';
+  $Video::Xine::VERSION = '0.26';
 }
 
 use 5.008003;

@@ -33,4 +33,4 @@ requires:
   warnings: 0
 resources:
   repository: https://github.com/stephenenelson/video-xine
-version: 0.25
+version: 0.26

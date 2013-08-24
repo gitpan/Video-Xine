@@ -1,6 +1,6 @@
 package Video::Xine::Util;
 {
-  $Video::Xine::Util::VERSION = '0.25';
+  $Video::Xine::Util::VERSION = '0.26';
 }
 
 use strict;
